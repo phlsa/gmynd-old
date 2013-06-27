@@ -19,6 +19,12 @@ window.Gmynd = {
 		ellipse: function( params ) {
 			params['border-radius'] = "50%";
 			this.set( params );
+		},
+		freeform: function( params ) {
+			var canv = $( '<canvas></canvas>' );
+			new Processing( canv[0], params.drawCode );
+			this.set( params );
+			this.elem.append( canv );
 		}
 	},
 

@@ -11,17 +11,28 @@
 			Gmynd.setup();
 
 			Initialize({
-				rect1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0'})/*,
+				rect1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0'} ),
+				triangle1: CreateShape( 'freeform', {width:200, height:200, drawCode: function( p ) {
+					p.setup = function() {
+						p.size( 200, 200 );
+						p.background( 0, 0 );
+						p.fill( 0 );
+						p.triangle( 100, 0, 200, 200, 0, 200 );
+					}
+				}})
+
 				//rect2: CreateShape( 'rect', 100, 200 ),
 				//rect3: CreateRect( 100, 200, 50, 50 ),
-
+/*
 				circles: CreateCollection( 20, function( count ) {
 					return CreateShape( 'circle', {radius:50, x:count, y:0});
 				})*/
 			});
 	
 			Every( 1000 ).milliseconds( function( frameCount ) {
-				Objects.rect1.set({ background:'rgb('+(2*100)+',0,0)' });
+				var rnd = Math.random()*255;
+				console.log( rnd );
+				Objects.rect1.set({ background:'rgb('+Math.round( rnd )+',0,0)' });
 			});
 
 			Objects.rect1.on( 'mousedown', function( event ) {
