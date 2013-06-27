@@ -14,13 +14,16 @@ window.Gmynd = {
 	// Basic shapes
 	shapes: {
 		rect: function( params ) {
+			this.init();
 			this.set( params );
 		},
 		ellipse: function( params ) {
+			this.init();
 			params['border-radius'] = "50%";
 			this.set( params );
 		},
 		freeform: function( params ) {
+			this.init();
 			var canv = $( '<canvas></canvas>' );
 			new Processing( canv[0], params.drawCode );
 			this.set( params );
@@ -30,9 +33,11 @@ window.Gmynd = {
 
 	// All Gmynd.shape objects will inherit these properties
 	BaseObject: function() {
-		this.elem = $('<div></div>');
-		this.elem.css({ 'position':'absolute' });
-
+		this.init = function() {
+			this.elem = $('<div></div>');
+			$( 'body' ).append( this.elem );
+			this.elem.css({ 'position':'absolute' });
+		};
 		this.on = function( event, handler ) {
 			$( this.elem ).on( event, handler );
 		};
@@ -40,13 +45,20 @@ window.Gmynd = {
 			this.elem.css( Gmynd.cssMap( params ));
 			_.extend( this, params );
 		};
+	},
 
-		$( 'body' ).append( this.elem );
+	// Collections
+	CreateCollection: function( num, fn ) {
+		var col = []
+		for ( var i=0; i<num; i++ ) {
+			col.push( fn( i ) );
+		};
+		return col;
 	},
 
 	// Basic setup
 	setup: function() {
-		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every"]);
+		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "CreateCollection"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
 		});

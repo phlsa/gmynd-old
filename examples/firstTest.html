@@ -19,21 +19,15 @@
 						p.fill( 0 );
 						p.triangle( 100, 0, 200, 200, 0, 200 );
 					}
-				}})
-
-				//rect2: CreateShape( 'rect', 100, 200 ),
-				//rect3: CreateRect( 100, 200, 50, 50 ),
-/*
-				circles: CreateCollection( 20, function( count ) {
-					return CreateShape( 'circle', {radius:50, x:count, y:0});
-				})*/
+				}}),
+				circles: CreateCollection( 20, function( cnt ) {
+					return CreateShape( 'rect', {width:20, height:20, left:cnt*22, top:cnt*5, background:'green'});
+				})
 			});
-	
+			
 			Every( 1000 ).milliseconds( function( frameCount ) {
 				var rnd = Math.random()*255;
-				console.log( rnd );
 				Objects.rect1.set({ background:'rgb('+Math.round( rnd )+',0,0)' });
-
 				Objects.triangle1.set({ left:Math.random()*300, top:Math.random()*300 });
 			});
 
