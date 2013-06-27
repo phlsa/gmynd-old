@@ -11,8 +11,8 @@
 			Gmynd.setup();
 
 			Initialize({
-				rect1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0'} ),
-				triangle1: CreateShape( 'freeform', {width:200, height:200, drawCode: function( p ) {
+				rect1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0', transition:'all 1s linear'} ),
+				triangle1: CreateShape( 'freeform', {width:200, height:200, transition:'all 0.7s ease', drawCode: function( p ) {
 					p.setup = function() {
 						p.size( 200, 200 );
 						p.background( 0, 0 );
@@ -33,6 +33,8 @@
 				var rnd = Math.random()*255;
 				console.log( rnd );
 				Objects.rect1.set({ background:'rgb('+Math.round( rnd )+',0,0)' });
+
+				Objects.triangle1.set({ left:Math.random()*300, top:Math.random()*300 });
 			});
 
 			Objects.rect1.on( 'mousedown', function( event ) {
