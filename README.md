@@ -1,5 +1,5 @@
 # Gmynd!
-A toolkit for easy graphic development.
+A toolkit that makes creating graphics easy.
 
 ## Todo
 - Write todo list
