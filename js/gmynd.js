@@ -42,9 +42,19 @@ window.Gmynd = {
 			$( this.elem ).on( event, handler );
 		};
 		this.set = function( params ) {
+			var self = this;
+			if ( params.children ) {
+				_.each( params.children, function( item ) {
+					item.setParent( self.elem );
+				});
+			}
 			this.elem.css( Gmynd.cssMap( params ));
 			_.extend( this, params );
 		};
+		this.setParent = function( target ) {
+			this.elem.remove();
+			this.elem.appendTo( target );
+		}
 	},
 
 	// Collections
