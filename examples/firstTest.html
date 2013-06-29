@@ -11,7 +11,7 @@
 			Gmynd.setup();
 
 			Initialize({
-				rect1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0', transition:'all 1s linear'} ),
+				circle1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0', transition:'all 1s linear'} ),
 				triangle1: CreateShape( 'freeform', {width:200, height:200, transition:'all 0.7s ease', drawCode: function( p ) {
 					p.setup = function() {
 						p.size( 200, 200 );
@@ -20,28 +20,29 @@
 						p.triangle( 100, 0, 200, 200, 0, 200 );
 					}
 				}}),
-				circles: CreateCollection( 20, function( cnt ) {
+				rects: CreateCollection( 20, function( cnt ) {
 					return CreateShape( 'rect', {width:20, height:20, left:cnt*22, top:cnt*5, background:'green'});
 				})
+
 			});
 			
 			Every( 1000 ).milliseconds( function( frameCount ) {
 				var rnd = Math.random()*255;
-				Objects.rect1.set({ background:'rgb('+Math.round( rnd )+',0,0)' });
+				Objects.circle1.set({ background:'rgb('+Math.round( rnd )+',0,0)' });
 				Objects.triangle1.set({ left:Math.random()*300, top:Math.random()*300 });
 			});
 
-			Objects.rect1.on( 'mousedown', function( event ) {
-				Objects.rect1.set({
+			Objects.circle1.on( 'mousedown', function( event ) {
+				Objects.circle1.set({
 					width:  Math.random()*400,
 					rotate: Math.random()*360
 				});
 			});
 
 			$( document ).on( 'mousemove', function( e ) {
-				Objects.rect1.set({
-					left: e.clientX - Objects.rect1.width/2,
-					top: e.clientY - Objects.rect1.height/2
+				Objects.circle1.set({
+					left: e.clientX - Objects.circle1.width/2,
+					top: e.clientY - Objects.circle1.height/2
 				})
 			});
 		});
