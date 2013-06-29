@@ -22,8 +22,12 @@
 				}}),
 				rects: CreateCollection( 20, function( cnt ) {
 					return CreateShape( 'rect', {width:20, height:20, left:cnt*22, top:cnt*5, background:'green'});
+				}),
+				grid1: CreateCollection( 10, function( j ) {
+					return CreateCollection( 10, function( i ) {
+						return CreateShape( 'ellipse', {width:20, height:20, left:500+i*25, top:200+j*25, background:'#33a'});
+					})	
 				})
-
 			});
 			
 			Every( 1000 ).milliseconds( function( frameCount ) {
@@ -43,7 +47,18 @@
 				Objects.circle1.set({
 					left: e.clientX - Objects.circle1.width/2,
 					top: e.clientY - Objects.circle1.height/2
-				})
+				});
+
+				Objects.grid1.forEach( function( row ) {
+   					row.forEach( function( entry ) {
+   						var dist = Math.sqrt(Math.pow(event.clientX-entry.left, 2) + Math.pow(event.clientY-entry.top, 2));
+   						var size = 40.0 / (dist/100 + 1);
+   						entry.set({
+   							width: size,
+   							height: size
+   						});
+					});
+				});
 			});
 		});
 	</script>
