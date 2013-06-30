@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World / GMYND</title>
+	<script type="text/javascript" src="../../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+	var outerRect = CreateShape( 'rect', {
+		width:200,
+		height:200,
+		left:100,
+		top:100,
+		children: {
+			innerRect: CreateShape( 'rect', {width:100, height:100, left:50, top:50, background:'#ccc', rotate:45})
+		}
+	});
+	outerRect.on( 'mousemove', function( e ) {
+		var rotation = e.clientX;
+		outerRect.set({ rotate:rotation });
+	});
+</script>
+</html>
