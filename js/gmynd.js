@@ -62,11 +62,11 @@ window.Gmynd = {
 
 	// Collections
 	CreateCollection: function( num, fn ) {
-		var col = []
+		var col = [];
 		for ( var i=0; i<num; i++ ) {
 			col.push( fn( i ) );
 		};
-		return col;
+		return Gmynd.CreateShape( 'rect', { children:col, background:'none' });
 	},
 
 	// Basic setup
