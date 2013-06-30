@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World / GMYND</title>
+	<script type="text/javascript" src="../../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+	var triangle = CreateShape( 'freeform', {width:200, height:200, drawCode: function( p ) {
+					p.setup = function() {
+						p.size( 200, 200 );
+						p.background( 0, 0 );
+						p.fill( 0 );
+						p.triangle( 100, 0, 200, 200, 0, 200 );
+					}
+				}})
+</script>
+</html>
