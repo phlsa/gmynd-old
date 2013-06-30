@@ -56,7 +56,11 @@ window.Gmynd = {
 			_.extend( this, params );
 		};
 		this.setParent = function( target ) {
-			this.elem.appendTo( target );
+			if ( target.elem ) {
+				this.elem.appendTo( target.elem );
+			} else {
+				this.elem.appendTo( $( target ) );
+			}
 		}
 	},
 
