@@ -36,7 +36,7 @@ window.Gmynd = {
 		this.init = function() {
 			this.elem = $('<div></div>');
 			$( 'body' ).append( this.elem );
-			this.elem.css({ 'position':'absolute' });
+			this.elem.css({ 'position':'absolute', 'background':'#333' });
 		};
 		this.on = function( event, handler ) {
 			$( this.elem ).on( event, handler );
