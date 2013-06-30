@@ -71,7 +71,7 @@ window.Gmynd = {
 
 	// Basic setup
 	setup: function() {
-		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection"]);
+		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection", "Calculate"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
 		});
@@ -151,6 +151,12 @@ window.Gmynd = {
 		return new Gmynd.TimedEvent( amount, 'setInterval' );
 	},
 	After: function( amount ) {
-		return new Gmynd.TimedEvent( amount, 'setTimeout')
+		return new Gmynd.TimedEvent( amount, 'setTimeout' );
+	},
+
+	Calculate: {
+		dist: function( x1, y1, x2, y2 ) {
+			return Math.sqrt( Math.pow( x1-x2, 2 ) + Math.pow( y1-y2, 2 ) );
+		}
 	}
 };
