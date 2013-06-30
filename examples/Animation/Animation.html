@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animation Example / GMYND</title>
+	<script type="text/javascript" src="../../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+	var circle = CreateShape( 'ellipse', {width:200, height:200, left:100, top:100});
+	Every( 2 ).seconds( function( count ) {
+		circle.set({ scale:2, transition:'all 0.3s ease-in' });
+		After( 300 ).milliseconds( function() {
+			circle.set({ transition:'all 1.7s ease-out', scale:1 });
+		});
+	});
+</script>
+</html>
