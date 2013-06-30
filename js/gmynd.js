@@ -95,10 +95,16 @@ window.Gmynd = {
 				transform: function( item, key, list ) { list[key] = item + 'px' }
 			},
 			{
-				keys: ["translate", "rotate", "scale"],
+				keys: ["translate", "rotate", "rotateX", "rotateY", "translateZ", "scale"],
 				transform: function( item, key, list ) {
 					if ( key === "rotate" ) {
 						transformString += " rotate("+item+"deg)";
+					} else if ( key === "rotateX" ) {
+						transformString += " rotateX("+item+"deg)";
+					} else if ( key === "rotateY" ) {
+						transformString += " rotateY("+item+"deg)";
+					} else if ( key === "translateZ" ) {
+						transformString += " translateZ("+item+"px)";
 					} else if ( key === "scale" ) {
 						transformString += " scale("+item+")";
 					}
@@ -157,6 +163,12 @@ window.Gmynd = {
 	Calculate: {
 		dist: function( x1, y1, x2, y2 ) {
 			return Math.sqrt( Math.pow( x1-x2, 2 ) + Math.pow( y1-y2, 2 ) );
+		},
+		map: function( val, fromMin, fromMax, toMin, toMax ) {
+			return ( val-fromMin ) / ( fromMax-fromMin ) * ( toMax-toMin ) + toMin;
+		},
+		constrain: function( val, min, max ) {
+			return Math.min( Math.max( val, min ), max);
 		}
 	}
 };
