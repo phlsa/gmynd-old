@@ -14,18 +14,19 @@ window.Gmynd = {
 	// Basic shapes
 	shapes: {
 		rect: function( params ) {
-			this.init();
+			this.init( params );
 			this.set( params );
 		},
 		ellipse: function( params ) {
-			this.init();
+			this.init( params );
 			params['border-radius'] = "50%";
 			this.set( params );
 		},
 		freeform: function( params ) {
-			this.init();
+			this.init( params );
 			var canv = $( '<canvas></canvas>' );
 			new Processing( canv[0], params.drawCode );
+			this.elem.css({ background:'transparent' });
 			this.set( params );
 			this.elem.append( canv );
 		}
@@ -33,10 +34,13 @@ window.Gmynd = {
 
 	// All Gmynd.shape objects will inherit these properties
 	BaseObject: function() {
-		this.init = function() {
+		this.init = function( params ) {
 			this.elem = $('<div></div>');
 			$( 'body' ).append( this.elem );
 			this.elem.css({ 'position':'absolute', 'background':'#333' });
+			if ( params.text ) {
+				this.elem.css({ 'text-align':'center', 'color':'#fff' }).text( params.text );
+			}
 		};
 		this.on = function( event, handler ) {
 			$( this.elem ).on( event, handler );
