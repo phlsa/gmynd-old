@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Transform3D Example / GMYND</title>
+	<script type="text/javascript" src="../../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+	
+	var myRect1 = CreateShape( 'rect', {
+		background:'#600',
+		width:200,
+		height:200,
+		left:50,
+		top:50,
+		translateZ: 20,
+		rotateX: 30,
+		rotateY: 40
+   	});
+	var myRect2 = CreateShape( 'rect', {
+		background:'#060',
+		width:200,
+		height:200,
+		left:100,
+		top:100,
+		translateZ: 0,
+		rotateX: 30,
+		rotateY: 40
+   	});
+	var myRect3 = CreateShape( 'rect', {
+		background:'#006',
+		width:200,
+		height:200,
+		left:150,
+		top:150,
+		translateZ: -20,
+		rotateX: 30,
+		rotateY: 40
+   	});
+
+	$( document ).on( 'mousemove', function( e ) {
+		var rotationX = e.clientY;
+		var rotationY = e.clientX;
+		myRect1.set({ translateZ:-e.clientX, rotateX:rotationX, rotateY:rotationY });
+		myRect2.set({ translateZ:-e.clientX, rotateX:rotationX+20, rotateY:rotationY-20 });
+		myRect3.set({ translateZ:-e.clientX, rotateX:rotationX+40, rotateY:rotationY-40 });
+	});
+
+</script>
+</html>
