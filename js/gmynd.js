@@ -75,12 +75,22 @@ window.Gmynd = {
 
 	// Basic setup
 	setup: function() {
-		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection"]);
 		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection", "Calculate"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
 		});
+		Gmynd.defaultStyles();
 		console.log( "GMYND has loaded successfully!" );
+	},
+
+	defaultStyles: function() {
+		$( 'body' ).css({
+			'-webkit-perspective':'800px',
+			'-moz-perspective':'800px',
+			'-ms-perspective':'800px',
+			'-o-perspective':'800px',
+			'perspective':'800px'
+		});
 	},
 
 	// Attach some functions of Gmynd to the window for easy access
@@ -100,12 +110,18 @@ window.Gmynd = {
 				transform: function( item, key, list ) { list[key] = item + 'px' }
 			},
 			{
-				keys: ["translate", "rotate", "scale"],
+				keys: ["translate", "translateZ", "translate3d", "rotate", "rotateX", "rotateY", "scale"],
 				transform: function( item, key, list ) {
-					if ( key === "rotate" ) {
-						transformString += " rotate("+item+"deg)";
-					} else if ( key === "scale" ) {
+					if ( _.include( ["rotate", "rotateX", "rotateY"], key ) ) {
+						transformString += " "+key+"("+item+"deg)";
+					} else if ( key === "scale") {
 						transformString += " scale("+item+")";
+					} else if ( key === "translateZ" ) {
+						transformString += " translateZ("+item+"px)";
+					} else if ( key === "translate" ) {
+						transformString += " translate("+item.x+"px, "+item.y+"px)";
+					} else if ( key === "translate3d" ) {
+						transformString += " translate3d("+item.x+"px, "+item.y+"px, "+item.z+"px)";
 					}
 				}
 			}
@@ -156,7 +172,6 @@ window.Gmynd = {
 		return new Gmynd.TimedEvent( amount, 'setInterval' );
 	},
 	After: function( amount ) {
-		return new Gmynd.TimedEvent( amount, 'setTimeout')
 		return new Gmynd.TimedEvent( amount, 'setTimeout' );
 	},
 
