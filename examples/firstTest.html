@@ -10,6 +10,17 @@
 		$( window ).ready( function() {
 			Gmynd.setup();
 
+			// Creating shapes this way works find. Do we need the function 'Initialize()'? 
+			var rect1 = CreateShape( 'rect', {left:500, width:100, height:100, background:'#099'});
+			var rect2 = CreateShape( 'rect', {width:50, height:50, background:'#000'});
+
+			rect2.on( 'mousedown', function() {
+				console.log("Hallo rect2");
+			});
+
+			rect2.setParent(rect1);
+
+
 			Initialize({
 				circle1: CreateShape( 'ellipse', {width:100, height:100, background:'#ff0', transition:'all 1s linear'} ),
 				triangle1: CreateShape( 'freeform', {width:200, height:200, transition:'all 0.7s ease', drawCode: function( p ) {

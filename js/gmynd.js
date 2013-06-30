@@ -56,8 +56,9 @@ window.Gmynd = {
 			_.extend( this, params );
 		};
 		this.setParent = function( target ) {
-			this.elem.remove();
-			this.elem.appendTo( target );
+			// Seems better not to call remove(), so the event handlers that are already attached will not be lost
+			//this.elem.remove();
+			this.elem.appendTo( target.elem );
 		}
 	},
 
