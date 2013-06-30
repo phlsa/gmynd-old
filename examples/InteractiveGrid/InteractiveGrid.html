@@ -17,10 +17,10 @@
 	});
 
 	$( window ).on( 'mousemove', function( e ) {
-		grid.forEach( function( row ) {
-			row.forEach( function( item ) {
-				var dist = Math.sqrt(Math.pow(event.clientX-item.left, 2) + Math.pow(event.clientY-item.top, 2));
-				var scaleFactor = 2 / (dist/100 + 1);
+		grid.children.forEach( function( row ) {
+			row.children.forEach( function( item ) {
+				var dist = Calculate.dist( event.clientX, event.clientY, item.left, item.top );
+				var scaleFactor = 2 / ( dist/100 + 1 );
 				item.set({ scale: scaleFactor });
 			});
 		});
