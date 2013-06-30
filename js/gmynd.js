@@ -72,7 +72,7 @@ window.Gmynd = {
 
 	// Basic setup
 	setup: function() {
-		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "CreateCollection"]);
+		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
 		});
@@ -136,19 +136,22 @@ window.Gmynd = {
 		this.fn = fn;
 		this.delay = delay;
 		this.milliseconds = function( callback ) {
-			return window.setInterval( function() {
+			return window[fn]( function() {
 				self.count++;
 				callback( self.count );
 			}, self.delay );
 		}
 		this.seconds = function( callback ) {
-			return window.setInterval( function() {
+			return window[fn]( function() {
 				self.count++;
 				callback( self.count );
 			}, self.delay*1000 );
 		}
 	},
 	Every: function( amount ) {
-		return new Gmynd.TimedEvent( amount, window.setInterval );
+		return new Gmynd.TimedEvent( amount, 'setInterval' );
+	},
+	After: function( amount ) {
+		return new Gmynd.TimedEvent( amount, 'setTimeout')
 	}
 };
