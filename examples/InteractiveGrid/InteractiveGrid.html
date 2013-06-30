@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interactive Grid Example / GMYND</title>
+	<script type="text/javascript" src="../../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+	var grid = CreateCollection( 10, function( j ) {
+		return CreateCollection( 10, function( i ) {
+			return CreateShape( 'ellipse', {width:20, height:20, left:i*25, top:j*25, background:'#33a'});
+		});
+	});
+
+	$( window ).on( 'mousemove', function( e ) {
+		grid.forEach( function( row ) {
+			row.forEach( function( item ) {
+				var dist = Math.sqrt(Math.pow(event.clientX-item.left, 2) + Math.pow(event.clientY-item.top, 2));
+				var scaleFactor = 2 / (dist/100 + 1);
+				item.set({ scale: scaleFactor });
+			});
+		});
+	});
+</script>
+</html>
