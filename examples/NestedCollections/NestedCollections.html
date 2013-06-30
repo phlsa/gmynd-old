@@ -14,5 +14,9 @@
 		return CreateShape( 'rect', {width:20, height:20, left:i*25, top:0, background:'#33a'});
 	});
 	row.set({ rotate:30 });
+
+	row.children.forEach( function( item ) {
+		item.set({ scale:Math.random() });
+	});
 </script>
 </html>
