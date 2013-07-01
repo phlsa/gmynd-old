@@ -143,7 +143,7 @@ window.Gmynd = {
 		});
 
 		// apply transformation if there is none
-		if ( !result.transform ) {
+		if ( !result.transform && transformString !== "" ) {
 			result.transform = transformString;
 		}
 		return result;
