@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Real World Example / GMYND</title>
+	<script type="text/javascript" src="../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../js/gmynd.js"></script>
+</head>
+<body></body>
+<script type="text/javascript">
+	Gmynd.setup();
+
+	var increment = 5;
+
+	var lines = CreateCollection( 50, function( i ) {
+		return CreateShape( 'rect', { width:3, height:200, left:i*10+100, top:50 });
+	});
+
+	Every( 50 ).milliseconds( function ( count ) {
+		lines.children.forEach( function ( item, index ) {
+			item.set({ rotate:count+index*increment });
+		});
+	});
+
+	// Why is it flickering?
+	$( document ).on( 'mousemove', function( event ) {
+		increment = Calculate.map( event.clientY, 0, 500, 1, 10);
+		var dist = Calculate.map( event.clientX, 0, 500, 4, 20);
+
+		lines.children.forEach( function ( item, index ) {
+			item.set({ left:index*dist+100 });
+		});
+
+	});
+
+</script>
+</html>
