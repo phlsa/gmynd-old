@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Real World Example / GMYND</title>
+	<script type="text/javascript" src="../js/lib/jquery.js"></script>
+	<script type="text/javascript" src="../js/lib/underscore.js"></script>
+	<script type="text/javascript" src="../js/lib/processing.js"></script>
+	<script type="text/javascript" src="../js/gmynd.js"></script>
+</head>
+<body>This looks smoother than Example_02 due to positioning elements with translate</body>
+<script type="text/javascript">
+	Gmynd.setup();
+
+	// Try to make the x-positioning smoother by using translate
+
+	var angleInc = 5;
+	var xInc = 5;
+	var frameCount = 0;
+
+	var lines1 = CreateCollection( 200, function( i ) {
+		return CreateShape( 'rect', { width:2, height:200, translate:{ x:i*5, y:50 } });
+	});
+	var lines2 = CreateCollection( 200, function( i ) {
+		return CreateShape( 'rect', { width:2, height:200, translate:{ x:i*5, y:150 } });
+	});
+
+	Every( 50 ).milliseconds( function ( count ) {
+		frameCount = count;
+
+		lines1.children.forEach( function ( item, index ) {
+			item.set({ translate:{ x:index*xInc, y:50 }, rotate:(frameCount+index*angleInc) });
+		});
+		lines2.children.forEach( function ( item, index ) {
+			item.set({ translate:{ x:index*xInc, y:150 }, rotate:-(frameCount+index*angleInc+90) });
+		});
+	});
+
+	$( document ).on( 'mousemove', function( event ) {
+		angleInc = Calculate.map( event.clientY, 0, 500, 1, 10);
+		xInc = Calculate.map( event.clientX, 0, 500, 2, 20);
+	});
+
+</script>
+</html>
