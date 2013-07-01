@@ -13,23 +13,31 @@
 
 	var increment = 5;
 
-	var lines = CreateCollection( 50, function( i ) {
-		return CreateShape( 'rect', { width:3, height:200, left:i*10+100, top:50 });
+	var lines1 = CreateCollection( 200, function( i ) {
+		return CreateShape( 'rect', { width:2, height:200, left:i*10, top:50 });
+	});
+	var lines2 = CreateCollection( 200, function( i ) {
+		return CreateShape( 'rect', { width:2, height:200, left:i*10, top:150 });
 	});
 
 	Every( 50 ).milliseconds( function ( count ) {
-		lines.children.forEach( function ( item, index ) {
-			item.set({ rotate:count+index*increment });
+		lines1.children.forEach( function ( item, index ) {
+			item.set({ rotate:(count+index*increment) });
+		});
+		lines2.children.forEach( function ( item, index ) {
+			item.set({ rotate:-(count+index*increment+90) });
 		});
 	});
 
-	// Why is it flickering?
 	$( document ).on( 'mousemove', function( event ) {
 		increment = Calculate.map( event.clientY, 0, 500, 1, 10);
-		var dist = Calculate.map( event.clientX, 0, 500, 4, 20);
+		var dist = Calculate.map( event.clientX, 0, 500, 2, 20);
 
-		lines.children.forEach( function ( item, index ) {
-			item.set({ left:index*dist+100 });
+		lines1.children.forEach( function ( item, index ) {
+			item.set({ left:index*dist });
+		});
+		lines2.children.forEach( function ( item, index ) {
+			item.set({ left:index*dist });
 		});
 
 	});
