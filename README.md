@@ -2,7 +2,7 @@
 A toolkit that makes creating graphics easy.
 
 ## Handling
-Look at the [wiki](./wiki) and the example(s) for instructions. 
+Look at the [wiki](https://github.com/phlsa/gmynd/wiki) and the example(s) for instructions. 
 Gmynd is currently in version 0.0.0.1 pre-alpha experimental unstable. So don't assume anything.
 
 ## Helping out
