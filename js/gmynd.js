@@ -6,6 +6,14 @@ window.Gmynd = {
 		_.extend( Gmynd.Objects, objects );
 	},
 
+	// Some easy to use abstractions for common shapes
+	CreateRect: function( x, y, w, h ) {
+		return CreateShape('rect', { left:x, top:y, width:w, height:h });
+	},
+	CreateEllipse: function( x, y, w, h ) {
+		return CreateShape('ellipse', { left:x, top:y, width:w, height:h });
+	},
+
 	// Create any shape
 	CreateShape: function( type, params ) {
 		return new Gmynd.shapes[type]( params );
@@ -61,7 +69,10 @@ window.Gmynd = {
 			} else {
 				this.elem.appendTo( $( target ) );
 			}
-		}
+		};
+		this.fill = function( color ) {
+			this.set({'background':color });
+		};
 	},
 
 	// Collections
@@ -75,7 +86,7 @@ window.Gmynd = {
 
 	// Basic setup
 	setup: function() {
-		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection", "Calculate"]);
+		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "CreateRect", "CreateEllipse", "Every", "After", "CreateCollection", "Calculate"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
 		});
