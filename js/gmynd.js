@@ -61,6 +61,16 @@ window.Gmynd = {
 			} else {
 				this.elem.appendTo( $( target ) );
 			}
+		};
+		this.append = function( item ) {
+			if ( item.elem ) {
+				item.appendTo( this );
+			} else {
+				this.elem.append( item );
+			}
+		};
+		this.remove = function() {
+			this.elem.remove();
 		}
 	},
 
