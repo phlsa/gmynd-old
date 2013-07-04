@@ -54,7 +54,7 @@ window.Gmynd = {
 					item.appendTo( self.elem );
 				});
 			}
-			this.elem.css( Gmynd.cssMap( params ));
+			this.elem.css( Gmynd.cssMap( params, this ));
 			_.extend( this, params );
 		};
 		this.appendTo = function( target ) {
@@ -116,7 +116,7 @@ window.Gmynd = {
 	},
 
 	// Map numeric properties to css values
-	cssMap: function( properties ) {
+	cssMap: function( properties, obj ) {
 		// List of transformations (e.g. "Add px to dimensions")
 		var transformString = "";
 		var maps = [
@@ -160,6 +160,20 @@ window.Gmynd = {
 		// apply transformation if there is none
 		if ( !result.transform && transformString !== "" ) {
 			result.transform = transformString;
+		}
+
+		// check if the element should be centered
+		if ( properties.centered === true || (properties.centered!==false && obj.centered===true) ) {
+			var w, h;
+			w = -obj.elem.width()/2;
+			h = -obj.elem.height()/2;
+			if ( properties.width ) {
+				w = -properties.width/2;
+			}
+			if ( properties.height ) {
+				h = -properties.height/2;	
+			}
+			result['margin'] = h + "px 0 0 " + w + "px";
 		}
 		return result;
 	}, // END cssMap
