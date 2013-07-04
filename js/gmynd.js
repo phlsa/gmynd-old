@@ -98,8 +98,8 @@ window.Gmynd = {
 
 	// Basic setup
 	setup: function( container ) {
-		if ( !container ) { container = 'body' }
-		Gmynd.container = container
+		if ( !container ) { container = $( 'body' ) }
+		Gmynd.container = $( container );
 		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection", "Calculate"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
