@@ -41,9 +41,11 @@ window.Gmynd = {
 			if ( params.text ) {
 				this.elem.css({ 'text-align':'center', 'color':'#fff' }).text( params.text );
 			}
+			return this;
 		};
 		this.on = function( event, handler ) {
 			$( this.elem ).on( event, handler );
+			return this;
 		};
 		this.set = function( params ) {
 			var self = this;
@@ -61,6 +63,7 @@ window.Gmynd = {
 			} else {
 				this.elem.appendTo( $( target ) );
 			}
+			return this;
 		};
 		this.append = function( item ) {
 			if ( item.elem ) {
@@ -68,9 +71,11 @@ window.Gmynd = {
 			} else {
 				this.elem.append( item );
 			}
+			return this;
 		};
 		this.remove = function() {
 			this.elem.remove();
+			return this;
 		}
 	},
 
