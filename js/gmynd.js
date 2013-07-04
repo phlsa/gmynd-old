@@ -41,26 +41,41 @@ window.Gmynd = {
 			if ( params.text ) {
 				this.elem.css({ 'text-align':'center', 'color':'#fff' }).text( params.text );
 			}
+			return this;
 		};
 		this.on = function( event, handler ) {
 			$( this.elem ).on( event, handler );
+			return this;
 		};
 		this.set = function( params ) {
 			var self = this;
 			if ( params.children ) {
 				_.each( params.children, function( item ) {
-					item.setParent( self.elem );
+					item.appendTo( self.elem );
 				});
 			}
 			this.elem.css( Gmynd.cssMap( params ));
 			_.extend( this, params );
 		};
-		this.setParent = function( target ) {
+		this.appendTo = function( target ) {
 			if ( target.elem ) {
 				this.elem.appendTo( target.elem );
 			} else {
 				this.elem.appendTo( $( target ) );
 			}
+			return this;
+		};
+		this.append = function( item ) {
+			if ( item.elem ) {
+				item.appendTo( this );
+			} else {
+				this.elem.append( item );
+			}
+			return this;
+		};
+		this.remove = function() {
+			this.elem.remove();
+			return this;
 		}
 	},
 

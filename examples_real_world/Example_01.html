@@ -28,8 +28,8 @@
 		left:70
 	});
 
-	moon.setParent( earth );
-	earth.setParent( sun );
+	moon.appendTo( earth );
+	earth.appendTo( sun );
 
 	Every( 20 ).milliseconds( function ( count ) {
 		sun.set({ rotate:count });
