@@ -1,5 +1,7 @@
 window.Gmynd = {
 
+	container: 'body',
+
 	// Setup objects
 	Objects: {},
 	Initialize: function( objects ) {
@@ -38,7 +40,7 @@ window.Gmynd = {
 			this.elem = $('<div></div>');
 			this.properties = {};
 			this.children = [];
-			$( 'body' ).append( this.elem );
+			$( Gmynd.container ).append( this.elem );
 			this.elem.css({ 'position':'absolute', 'background':'#333' });
 			if ( params.text ) {
 				this.elem.css({ 'text-align':'center', 'color':'#fff' }).text( params.text );
@@ -83,7 +85,7 @@ window.Gmynd = {
 			this.elem.remove();
 			return this;
 		}
-	},
+	}, // end BaseObject
 
 	// Collections
 	CreateCollection: function( num, fn ) {
@@ -95,7 +97,9 @@ window.Gmynd = {
 	},
 
 	// Basic setup
-	setup: function() {
+	setup: function( container ) {
+		if ( !container ) { container = 'body' }
+		Gmynd.container = container
 		Gmynd.globalize(["Objects", "Initialize", "CreateShape", "Every", "After", "CreateCollection", "Calculate"]);
 		_.each( Gmynd.shapes, function( item ) {
 			item.prototype = new Gmynd.BaseObject;
@@ -105,7 +109,7 @@ window.Gmynd = {
 	},
 
 	defaultStyles: function() {
-		$( 'body' ).css({
+		$( Gmynd.container ).css({
 			'-webkit-perspective':'800px',
 			'-moz-perspective':'800px',
 			'-ms-perspective':'800px',
