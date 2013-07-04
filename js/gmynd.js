@@ -215,14 +215,27 @@ window.Gmynd = {
 	},
 
 	Calculate: {
+		constrain: function( val, min, max ) {
+			return Math.min( Math.max( val, min ), max);
+		},
 		dist: function( x1, y1, x2, y2 ) {
 			return Math.sqrt( Math.pow( x1-x2, 2 ) + Math.pow( y1-y2, 2 ) );
+		},
+		lerp: function( min, max, amount ) {
+			return min + ( max - min ) * amount;
 		},
 		map: function( val, fromMin, fromMax, toMin, toMax ) {
 			return ( val-fromMin ) / ( fromMax-fromMin ) * ( toMax-toMin ) + toMin;
 		},
-		constrain: function( val, min, max ) {
-			return Math.min( Math.max( val, min ), max);
+		mag: function( x, y, z ) {
+			if ( z == undefined) return Math.sqrt( x*x + y*y);
+			return Math.sqrt( x*x + y*y + z*z);
+		},
+		random: function( val1, val2 ) {
+			if ( val1 == undefined ) return Math.random();
+			if ( val2 == undefined ) return Math.random() * val1;
+			return Math.random() * ( val2 - val1 ) + val1;
 		}
 	}
+
 };
