@@ -36,6 +36,8 @@ window.Gmynd = {
 	BaseObject: function() {
 		this.init = function( params ) {
 			this.elem = $('<div></div>');
+			this.properties = {};
+			this.children = [];
 			$( 'body' ).append( this.elem );
 			this.elem.css({ 'position':'absolute', 'background':'#333' });
 			if ( params.text ) {
@@ -53,9 +55,13 @@ window.Gmynd = {
 				_.each( params.children, function( item ) {
 					item.appendTo( self.elem );
 				});
+				_.extend( this.children, params.children );
 			}
 			this.elem.css( Gmynd.cssMap( params, this ));
-			_.extend( this, params );
+			_.extend( this.properties, params );
+		};
+		this.get = function( key ) {
+			return this.properties[key];
 		};
 		this.appendTo = function( target ) {
 			if ( target.elem ) {
